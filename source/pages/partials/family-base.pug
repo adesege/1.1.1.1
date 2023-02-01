@@ -113,6 +113,23 @@ html(theme='light' lang=htmlWebpackPlugin.options.locale.code prefix="og: http:/
           a.Nav--link.Nav--link-active(href='/family/')
             span!=htmlWebpackPlugin.options.t('family.name')
 
+
+          .language-selector(
+            tabindex="3"
+            role="button"
+            data-ref="languageSelector")
+            .selector-label
+              include ../../media/globe.svg
+              span.chosen-language!=htmlWebpackPlugin.options.locale.label
+              include ../../media/caret.svg
+
+            .dropdown
+              each locale in htmlWebpackPlugin.options.locales.filter(locale => locale.code !== htmlWebpackPlugin.options.locale.code)
+                a.language(
+                  href="/" + locale.path + "family/"
+                  class={selected: htmlWebpackPlugin.options.locale.code === locale.code})
+                  | #{locale.label}
+
       .HeroSection
         .HeroSection--content
           .HeroSection--logo
@@ -349,7 +366,7 @@ html(theme='light' lang=htmlWebpackPlugin.options.locale.code prefix="og: http:/
             .InstallSection--panel
               h3.InstallSection--panel-title!=htmlWebpackPlugin.options.t('family.section.setup.malware.title')
               div.InstallSection--panel-description!=htmlWebpackPlugin.options.t('family.section.setup.malware.description')
-  
+
             .InstallSection--panel
               h3.InstallSection--panel-title!=htmlWebpackPlugin.options.t('family.section.setup.all.title')
               div.InstallSection--panel-description!=htmlWebpackPlugin.options.t('family.section.setup.all.description')
